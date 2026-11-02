@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createEntry, findOrCreatePerson, getSeason } from "@/lib/data";
 import { getDb } from "@/lib/db";
+import { resetInviteCode } from "@/lib/invite";
 import { displayName } from "@/lib/names";
 import { entries, picks, seasons, teams } from "@/lib/db/schema";
 import { requireAdmin } from "@/lib/session";
@@ -55,6 +56,12 @@ export async function updateSettings(year: number, _: AdminState, form: FormData
     .where(eq(seasons.year, year));
   refresh(year);
   return { ok: "Saved" };
+}
+
+export async function resetInvite() {
+  await requireAdmin();
+  await resetInviteCode();
+  revalidatePath("/admin");
 }
 
 export async function makeActive(year: number) {

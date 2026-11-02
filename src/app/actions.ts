@@ -1,12 +1,16 @@
 "use server";
 
-import { headers } from "next/headers";
+import { timingSafeEqual } from "node:crypto";
+import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { redeemLoginLink, sendLoginLink } from "@/lib/auth";
+import { getDb } from "@/lib/db";
+import { people } from "@/lib/db/schema";
+import { hasInvite } from "@/lib/invite";
 import { displayName, hasLastName } from "@/lib/names";
 import {
+  adminEmails,
   createEntry,
   getCurrentSeason,
   getEntry,
@@ -17,35 +21,58 @@ import {
 } from "@/lib/data";
 import { clearSession, getCurrentPerson, setSession } from "@/lib/session";
 
-export type FormState = { error?: string; ok?: string; devLink?: string } | undefined;
+export type FormState = { error?: string; ok?: string } | undefined;
 
-const signInSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(3, "Enter your full name")
-    .refine(hasLastName, "Enter your first and last name (standings show “Josh O”)"),
-  email: z.email("Enter a valid email"),
-});
+export type SignInState =
+  | { step: "email" | "name" | "password"; email?: string; name?: string; error?: string }
+  | undefined;
 
-/** Emails a one-time sign-in link. Nobody is signed in until they open it. */
-export async function signIn(_: FormState, form: FormData): Promise<FormState> {
-  const parsed = signInSchema.safeParse({ name: form.get("name"), email: form.get("email") });
-  if (!parsed.success) return { error: parsed.error.issues[0].message };
-  const h = await headers();
-  const origin = `${h.get("x-forwarded-proto") ?? "http"}://${h.get("host")}`;
-  try {
-    const { devLink } = await sendLoginLink({ ...parsed.data, origin });
-    return { ok: `Check ${parsed.data.email} for your sign-in link. It works for 30 minutes.`, devLink };
-  } catch (err) {
-    return { error: err instanceof Error ? err.message : "Couldn't send the email" };
-  }
+const emailSchema = z.email("Enter a valid email");
+const nameSchema = z
+  .string()
+  .trim()
+  .min(3, "Enter your full name")
+  .refine(hasLastName, "Enter your first and last name (standings show “Josh O”)");
+
+function adminPasswordMatches(given: string): boolean {
+  const expected =
+    process.env.ADMIN_PASSWORD ?? (process.env.NODE_ENV === "production" ? undefined : "local-admin");
+  if (!expected) return false; // no admin password set in production: admin sign-in stays closed
+  return given.length === expected.length && timingSafeEqual(Buffer.from(given), Buffer.from(expected));
 }
 
-/** Second step of sign-in, run by a button click so email link scanners can't use up the link. */
-export async function finishSignIn(token: string): Promise<FormState> {
-  const person = await redeemLoginLink(token);
-  if (!person) return { error: "That link has expired or was already used. Request a new one." };
+/**
+ * Invite-only sign-in by email. Returning players just enter their email; new players also give their full name.
+ * Admin emails must also give ADMIN_PASSWORD, since anyone with the invite link could type Josh's email.
+ */
+export async function signIn(_: SignInState, form: FormData): Promise<SignInState> {
+  const parsedEmail = emailSchema.safeParse(String(form.get("email") ?? "").trim().toLowerCase());
+  if (!parsedEmail.success) return { step: "email", error: parsedEmail.error.issues[0].message };
+  const email = parsedEmail.data;
+  // Admins (who also need the password below) can sign in without the invite link, e.g. to get it the first time.
+  if (!adminEmails().includes(email) && !(await hasInvite())) {
+    return { step: "email", error: "Open the invite link from Josh’s email first." };
+  }
+  const name = String(form.get("name") ?? "").trim();
+  const password = String(form.get("password") ?? "");
+
+  const db = await getDb();
+  let [person] = await db.select().from(people).where(eq(people.email, email));
+
+  if (!person) {
+    if (!name) return { step: "name", email };
+    const parsedName = nameSchema.safeParse(name);
+    if (!parsedName.success) return { step: "name", email, name, error: parsedName.error.issues[0].message };
+  }
+
+  if (adminEmails().includes(email)) {
+    if (!password) return { step: "password", email, name };
+    if (!adminPasswordMatches(password)) return { step: "password", email, name, error: "That password isn’t right." };
+  }
+
+  if (!person) {
+    [person] = await db.insert(people).values({ name: name.replace(/\s+/g, " "), email }).returning();
+  }
   await setSession(person.id);
   redirect("/picks");
 }

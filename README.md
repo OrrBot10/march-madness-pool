@@ -16,8 +16,14 @@ Open http://localhost:3000. The first load creates a local database in `.data/` 
 - **2026 replay**: the real 2026 tournament from saved ESPN data with the real entries. In Admin → 2026 →
   "Replay a past tournament", pick a date to see the site as it was that day.
 
-Copy `.env.example` to `.env.local`. Anyone signed in with an email in `ADMIN_EMAILS` gets the Admin link.
-Delete `.data/` to start over.
+Copy `.env.example` to `.env.local`. Delete `.data/` to start over.
+
+## Sign-in
+
+Invite-only, no passwords for players. Josh emails one link (`/join/<code>`, shown in Admin with copy/reset
+buttons). Opening it lets that browser sign up (email + full name) or log back in (email only). Public pages
+show "First L". Emails in `ADMIN_EMAILS` also need `ADMIN_PASSWORD` (locally `local-admin`), and can sign in
+without the link via "Organizer sign-in".
 
 ## Tests
 
@@ -50,8 +56,8 @@ Edit `src/lib/db/schema.ts`, then `npm run db:generate`. Migrations in `drizzle/
 
 ## Status
 
-Built: scoring engine, history, sign-in (local only, no email check yet), one entry per person with a running total,
+Built: scoring engine, history, invite-link sign-in, one entry per person with a running total,
 everyone's picks, standings, admin (season setup from ESPN, bracket names, lock time, results and overrides,
 entries and payments), ESPN results sync.
 
-Not built yet: emailed sign-in links, round recap emails, hosting.
+Not built yet: round recap drafts. Hosting: see DEPLOY.md.
