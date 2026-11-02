@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import { CourtLines } from "@/components/CourtLines";
 import { money } from "@/lib/format";
 import { REGIONS, priceForSeed, type Region } from "@/lib/pool/rules";
 import { savePicks, type FormState } from "../../actions";
@@ -133,8 +134,9 @@ export function PickEditor(props: {
         ))}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 bg-navy text-white shadow-[0_-4px_16px_rgba(0,0,0,0.15)]">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <div className="banner fixed inset-x-0 bottom-0 overflow-hidden text-white shadow-[0_-4px_16px_rgba(0,0,0,0.15)]">
+        <CourtLines className="text-white/[0.06]" />
+        <div className="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <div className="tabular" aria-live="polite">
             <div className="text-xs uppercase tracking-wide text-white/70">Your total</div>
             <div className="text-3xl font-bold leading-tight">{money(totals.cost + entryFee, { whole: true })}</div>
@@ -150,7 +152,7 @@ export function PickEditor(props: {
               <button
                 onClick={save}
                 disabled={!dirty || pending}
-                className="rounded-md bg-accent px-5 py-2 font-semibold text-accent-ink disabled:opacity-50"
+                className="display rounded-md bg-hardwood px-5 py-2 text-base font-bold uppercase tracking-wide text-white disabled:opacity-50"
               >
                 {pending ? "Saving…" : "Save picks"}
               </button>

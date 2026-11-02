@@ -1,34 +1,41 @@
 @import "tailwindcss";
 
+/* Tournament palette: deep navy, bright tournament blue, white, hardwood accents. */
 :root {
-  --bg: #f6f5f2;
+  --bg: #f3f5f9;
   --surface: #ffffff;
-  --ink: #14213d;
-  --muted: #5c6378;
-  --line: #e3e1db;
-  --accent: #e8590c;
+  --ink: #0a1b33;
+  --muted: #56627a;
+  --line: #dde3ec;
+  --accent: #0072ce;
   --accent-ink: #ffffff;
-  --navy: #0b2545;
-  --gain: #1a7f37;
-  --gain-bg: #dcf3e2;
+  --sky: #4cc3f2;
+  --navy: #0a2240;
+  --navy-2: #12345f;
+  --hardwood: #f26b1d;
+  --gain: #137a3a;
+  --gain-bg: #dcf3e4;
   --loss: #b42318;
-  --chip: #f0eee9;
+  --chip: #eaeef5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0d1220;
-    --surface: #151c2e;
-    --ink: #e8ebf2;
-    --muted: #9aa3b8;
-    --line: #26304a;
-    --accent: #ff7a2f;
-    --accent-ink: #111;
-    --navy: #0a1426;
+    --bg: #071426;
+    --surface: #0e2140;
+    --ink: #e8eef8;
+    --muted: #9fb0c8;
+    --line: #1e3558;
+    --accent: #3aa8ff;
+    --accent-ink: #04111f;
+    --sky: #6fd3ff;
+    --navy: #04101f;
+    --navy-2: #0b2546;
+    --hardwood: #ff8a3d;
     --gain: #4ade80;
-    --gain-bg: #12341f;
+    --gain-bg: #10331f;
     --loss: #f87171;
-    --chip: #1d2640;
+    --chip: #15294a;
   }
 }
 
@@ -40,13 +47,16 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-sky: var(--sky);
   --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-hardwood: var(--hardwood);
   --color-gain: var(--gain);
   --color-gain-bg: var(--gain-bg);
   --color-loss: var(--loss);
   --color-chip: var(--chip);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-roboto);
+  --font-display: var(--font-roboto-condensed);
 }
 
 body {
@@ -54,6 +64,28 @@ body {
   color: var(--ink);
 }
 
+/* Bold, condensed, uppercase headings in the style of tournament graphics. */
+h1,
+h2,
+.display {
+  font-family: var(--font-roboto-condensed);
+  letter-spacing: 0.01em;
+}
+h1 {
+  text-transform: uppercase;
+  font-weight: 800;
+}
+h2 {
+  font-weight: 700;
+}
+
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Navy banner with a soft blue glow, used behind court-line artwork. */
+.banner {
+  background:
+    radial-gradient(120% 140% at 85% -20%, color-mix(in srgb, var(--sky) 28%, transparent) 0%, transparent 55%),
+    linear-gradient(180deg, var(--navy-2), var(--navy));
 }

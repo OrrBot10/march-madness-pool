@@ -1,40 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto, Roboto_Condensed } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
+import { CourtLines } from "@/components/CourtLines";
+import { BallMark } from "@/components/Logo";
+import { NavLinks } from "@/components/NavLinks";
 import { getCurrentPerson } from "@/lib/session";
+import { SITE } from "@/lib/site";
 import { signOut } from "./actions";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const roboto = Roboto({ variable: "--font-roboto", subsets: ["latin"], weight: ["400", "500", "700"] });
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "March Madness Investment Pool",
-  description: "Buy shares in tournament teams and collect dividends every round they win.",
+  title: { default: SITE.name, template: `%s · ${SITE.name}` },
+  description: `${SITE.tagline}. Buy shares in tournament teams and collect dividends every round they win.`,
 };
-
-const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/picks", label: "My Picks" },
-  { href: "/entries", label: "All Picks" },
-  { href: "/standings", label: "Standings" },
-  { href: "/history", label: "History" },
-  { href: "/rules", label: "Rules" },
-];
 
 async function Account() {
   const person = await getCurrentPerson();
   if (!person) {
     return (
-      <Link href="/signin" className="rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-accent-ink">
+      <Link href="/signin" className="rounded-md bg-white px-3 py-1.5 text-sm font-bold text-navy hover:bg-sky">
         Sign in
       </Link>
     );
@@ -54,33 +46,36 @@ async function Account() {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${roboto.variable} ${robotoCondensed.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
-        <header className="bg-navy text-white">
-          <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-            <Link href="/" className="flex items-center gap-2 font-bold tracking-tight">
-              <span aria-hidden className="grid h-7 w-7 place-items-center rounded-full bg-accent text-sm text-accent-ink">
-                $
-              </span>
-              <span>
-                March Madness <span className="text-accent">Investment Pool</span>
+        <header className="banner relative overflow-hidden text-white">
+          <CourtLines className="text-white/[0.07]" />
+          <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 pt-3 pb-2">
+            <Link href="/" className="flex items-center gap-2.5">
+              <BallMark className="h-9 w-9 shrink-0" />
+              <span className="leading-none">
+                <span className="display block text-xl font-extrabold uppercase tracking-wide">{SITE.name}</span>
+                <span className="mt-0.5 block text-[11px] text-sky">{SITE.tagline}</span>
               </span>
             </Link>
             <Suspense fallback={<span className="h-8 w-16" />}>
               <Account />
             </Suspense>
           </div>
-          <nav className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 pb-2 text-sm">
-            {NAV.map((n) => (
-              <Link key={n.href} href={n.href} className="shrink-0 rounded-md px-3 py-1.5 text-white/85 hover:bg-white/10">
-                {n.label}
-              </Link>
-            ))}
-          </nav>
+          <NavLinks />
+          <div aria-hidden className="relative h-1 bg-gradient-to-r from-sky via-accent to-hardwood" />
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6">{children}</main>
-        <footer className="mx-auto w-full max-w-6xl px-4 py-6 text-xs text-muted">
-          Questions? Ask Josh. Settle up via Venmo @Josh-Orr-20 or PayPal joshrorr@hotmail.com.
+        <footer className="border-t border-line">
+          <div className="mx-auto max-w-6xl space-y-1 px-4 py-6 text-xs text-muted">
+            <p>
+              <strong className="text-ink">{SITE.name}</strong> is {SITE.owner}’s private pool, running since {SITE.since}.
+              Questions? Ask Josh.
+            </p>
+            <p>
+              Settle up via Venmo {SITE.venmo} or PayPal {SITE.paypal}. Not affiliated with the NCAA.
+            </p>
+          </div>
         </footer>
       </body>
     </html>

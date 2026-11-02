@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { CourtLines } from "@/components/CourtLines";
 import { Stat } from "@/components/Stat";
+import { SITE } from "@/lib/site";
 import { getCurrentSeason, getSeasonData, picksLocked } from "@/lib/data";
 import { money } from "@/lib/format";
 import { computePool } from "@/lib/pool/engine";
@@ -17,13 +19,17 @@ export default async function Home() {
     .sort((a, b) => b.shares - a.shares)
     .slice(0, 10);
   const maxShares = top[0]?.shares ?? 1;
-  const spends = result.entries.map((e) => e.spent + e.entryFee);
+  const spends = result.entries.filter((e) => e.spent > 0).map((e) => e.spent + e.entryFee);
 
   return (
     <div className="space-y-6">
-      <section className="rounded-xl bg-navy p-6 text-white">
-        <div className="text-sm uppercase tracking-wide text-white/70">{season.year} pool</div>
-        <h1 className="mt-1 text-3xl font-bold">
+      <section className="banner relative overflow-hidden rounded-xl p-6 text-white sm:p-8">
+        <CourtLines className="text-white/[0.09]" />
+        <div className="relative">
+        <div className="display text-sm font-semibold uppercase tracking-widest text-sky">
+          {SITE.name} · {season.year}
+        </div>
+        <h1 className="mt-1 text-3xl sm:text-4xl">
           {locked ? "Picks are locked. Enjoy the games!" : "Picks are open"}
         </h1>
         <p className="mt-2 max-w-2xl text-white/80">
@@ -41,11 +47,13 @@ export default async function Home() {
         {!locked && (
           <Link
             href="/picks"
-            className="mt-4 inline-block rounded-md bg-accent px-5 py-2 font-semibold text-accent-ink"
+            className="display mt-5 inline-block rounded-md bg-hardwood px-6 py-2.5 text-lg font-bold uppercase tracking-wide text-white hover:brightness-110"
           >
             Make your picks
           </Link>
         )}
+        <p className="mt-5 text-xs text-white/60">Hosted by {SITE.owner} since {SITE.since}.</p>
+        </div>
       </section>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
