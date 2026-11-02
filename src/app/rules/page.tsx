@@ -1,5 +1,6 @@
 import { BONUSES, ENTRY_FEE, PRICE_BY_SEED, ROUNDS } from "@/lib/pool/rules";
 import { pct } from "@/lib/format";
+import { Example } from "./Example";
 
 export default function RulesPage() {
   return (
@@ -70,6 +71,8 @@ export default function RulesPage() {
           <li>Nothing is collected up front. After the championship, pay or get paid via Venmo or PayPal.</li>
         </ul>
       </section>
+
+      <Example />
 
       <section>
         <h2 className="text-lg font-semibold">Tips</h2>
