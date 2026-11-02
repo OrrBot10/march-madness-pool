@@ -4,11 +4,66 @@ import { Stat } from "@/components/Stat";
 import { SITE } from "@/lib/site";
 import { getCurrentSeason, getSeasonData, picksLocked } from "@/lib/data";
 import { money } from "@/lib/format";
+import { historyYears, loadHistoryYear } from "@/lib/history-data";
 import { computePool } from "@/lib/pool/engine";
+
+/** Before the first season is created (or between seasons): what the pool is, and last year's results. */
+function OffSeason() {
+  const lastYear = historyYears()[0];
+  const last = lastYear ? loadHistoryYear(lastYear) : null;
+  const result = last ? computePool(last) : null;
+  const champ = last?.teams.find((t) => t.wins === 6);
+  const top = result ? [...result.entries].sort((a, b) => b.net - a.net).slice(0, 3) : [];
+
+  return (
+    <div className="space-y-6">
+      <section className="banner relative overflow-hidden rounded-xl p-6 text-white sm:p-8">
+        <CourtLines className="text-white/[0.09]" />
+        <div className="relative">
+          <div className="display text-sm font-semibold uppercase tracking-widest text-sky">Off-season</div>
+          <h1 className="mt-1 text-3xl sm:text-4xl">See you in March</h1>
+          <p className="mt-2 max-w-2xl text-white/80">
+            Picks open right after Selection Sunday. Watch for Josh’s invite email with your link to join.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/rules"
+              className="display rounded-md bg-hardwood px-5 py-2 text-lg font-bold uppercase tracking-wide text-white hover:brightness-110"
+            >
+              How it works
+            </Link>
+            {lastYear && (
+              <Link
+                href={`/history/${lastYear}`}
+                className="display rounded-md border border-white/40 px-5 py-2 text-lg font-bold uppercase tracking-wide text-white hover:bg-white/10"
+              >
+                {lastYear} results
+              </Link>
+            )}
+          </div>
+          <p className="mt-5 text-xs text-white/60">Hosted by {SITE.owner} since {SITE.since}.</p>
+        </div>
+      </section>
+
+      {last && result && (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Stat label={`${last.year} entries`} value={String(last.entries.length)} />
+          <Stat label={`${last.year} pot`} value={money(result.pot + result.feePot, { whole: true })} />
+          <Stat label="Champion" value={champ?.name ?? "—"} sub={champ ? `${champ.seed} seed` : undefined} />
+          <Stat
+            label="Top return"
+            value={top[0]?.name ?? "—"}
+            sub={top[0] ? `+${money(top[0].net)}` : undefined}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default async function Home() {
   const season = await getCurrentSeason();
-  if (!season) return <p>The next pool hasn’t been set up yet. Check back after Selection Sunday.</p>;
+  if (!season) return <OffSeason />;
 
   const { teams, entries, completedRounds } = await getSeasonData(season.year);
   const result = computePool({ teams, entries, completedRounds });
