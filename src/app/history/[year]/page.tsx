@@ -29,18 +29,23 @@ async function HistoryYear({ params }: { params: Promise<{ year: string }> }) {
   const champ = data.teams.find((t) => t.wins === 6);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div>
         <Link href="/history" className="text-sm text-muted hover:text-ink">
           ← Past pools
         </Link>
         <h1 className="mt-1 text-2xl font-bold">{data.year} final results</h1>
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Stat label="Entries" value={String(data.entries.length)} />
-        <Stat label="Pot" value={money(result.pot + result.feePot, { whole: true })} sub={`${money(result.pot, { whole: true })} shares + ${money(result.feePot, { whole: true })} fees`} />
-        <Stat label="Shares" value={String(result.totalShares)} />
-        <Stat label="Champion" value={champ?.name ?? "—"} sub={champ ? `${champ.seed} seed` : undefined} />
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <Stat compact label="Entries" value={String(data.entries.length)} />
+        <Stat
+          compact
+          label="Pot"
+          value={money(result.pot + result.feePot, { whole: true })}
+          sub={`${money(result.pot, { whole: true })} shares + ${money(result.feePot, { whole: true })} fees`}
+        />
+        <Stat compact label="Shares" value={String(result.totalShares)} />
+        <Stat compact label="Champion" value={champ?.name ?? "—"} sub={champ ? `${champ.seed} seed` : undefined} />
       </div>
       <RoundSummary result={result} teams={data.teams} />
       <StandingsTable entries={result.entries} showLive={false} />

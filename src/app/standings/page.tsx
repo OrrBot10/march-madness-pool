@@ -15,7 +15,7 @@ export default async function StandingsPage() {
   const inGreen = result.entries.filter((e) => e.net > 0).length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div>
         <h1 className="text-2xl font-bold">{season.year} standings</h1>
         <p className="mt-1 text-sm text-muted">
@@ -24,15 +24,21 @@ export default async function StandingsPage() {
             : "No rounds are complete yet. Dividends post once every game in a round is final."}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Stat label="Pot paid out" value={pct(result.potPaidPct)} sub={`${money(result.pot * result.potPaidPct, { whole: true })} of ${money(result.pot, { whole: true })}`} />
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <Stat
-          label="Break-even line"
-          value={`${pct(result.potPaidPct - 1)}`}
-          sub="Entries better than this are ahead of pace"
+          compact
+          label="Pot paid out"
+          value={pct(result.potPaidPct)}
+          sub={`${money(result.pot * result.potPaidPct, { whole: true })} of ${money(result.pot, { whole: true })}`}
         />
-        <Stat label="In the green" value={String(inGreen)} sub={`of ${result.entries.length} entries`} />
-        <Stat label="Eliminated" value={String(result.entries.filter((e) => e.eliminated).length)} sub="no teams left" />
+        <Stat compact label="Break-even line" value={`${pct(result.potPaidPct - 1)}`} sub="Better than this = ahead of pace" />
+        <Stat compact label="In the green" value={String(inGreen)} sub={`of ${result.entries.length} entries`} />
+        <Stat
+          compact
+          label="Eliminated"
+          value={String(result.entries.filter((e) => e.eliminated).length)}
+          sub="no teams left"
+        />
       </div>
       <RoundSummary result={result} teams={teams} />
       <StandingsTable entries={result.entries} />

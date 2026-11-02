@@ -1,4 +1,13 @@
-export function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
+export function Stat({ label, value, sub, compact }: { label: string; value: string; sub?: string; compact?: boolean }) {
+  if (compact) {
+    return (
+      <div className="rounded-lg border border-line bg-surface px-3 py-2">
+        <div className="text-[11px] font-medium uppercase tracking-wide text-muted">{label}</div>
+        <div className="text-lg font-bold leading-tight tabular">{value}</div>
+        {sub && <div className="truncate text-[11px] text-muted">{sub}</div>}
+      </div>
+    );
+  }
   return (
     <div className="rounded-lg border border-line bg-surface p-4">
       <div className="text-xs font-medium uppercase tracking-wide text-muted">{label}</div>
