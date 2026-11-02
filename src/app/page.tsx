@@ -3,7 +3,7 @@ import { CourtLines } from "@/components/CourtLines";
 import { Stat } from "@/components/Stat";
 import { SITE } from "@/lib/site";
 import { getCurrentSeason, getSeasonData, picksLocked } from "@/lib/data";
-import { money } from "@/lib/format";
+import { money, pct } from "@/lib/format";
 import { historyYears, loadHistoryYear } from "@/lib/history-data";
 import { computePool } from "@/lib/pool/engine";
 
@@ -50,12 +50,39 @@ function OffSeason() {
           <Stat label={`${last.year} entries`} value={String(last.entries.length)} />
           <Stat label={`${last.year} pot`} value={money(result.pot + result.feePot, { whole: true })} />
           <Stat label="Champion" value={champ?.name ?? "—"} sub={champ ? `${champ.seed} seed` : undefined} />
-          <Stat
-            label="Top return"
-            value={top[0]?.name ?? "—"}
-            sub={top[0] ? `+${money(top[0].net)}` : undefined}
-          />
+          <Stat label="Shares bought" value={String(result.totalShares)} />
         </div>
+      )}
+
+      {top.length > 0 && (
+        <section className="rounded-lg border border-line bg-surface p-4">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-lg">{lastYear} top 3</h2>
+            <Link href={`/history/${lastYear}`} className="text-sm text-accent hover:underline">
+              Full standings →
+            </Link>
+          </div>
+          <ol className="mt-3 grid gap-3 sm:grid-cols-3">
+            {top.map((e, i) => (
+              <li key={e.entryId} className="flex items-center gap-3 rounded-md bg-chip p-3">
+                <span
+                  className={`display grid h-10 w-10 shrink-0 place-items-center rounded-full text-lg font-extrabold text-white ${
+                    ["bg-[#c9a227]", "bg-[#8a96a8]", "bg-[#b0703c]"][i]
+                  }`}
+                  aria-label={["1st", "2nd", "3rd"][i]}
+                >
+                  {i + 1}
+                </span>
+                <span className="min-w-0">
+                  <span className="block truncate font-semibold">{e.name}</span>
+                  <span className="block text-sm text-gain tabular">
+                    +{money(e.net)} <span className="text-muted">({pct(e.pctReturn)})</span>
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </section>
       )}
     </div>
   );
