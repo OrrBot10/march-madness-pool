@@ -1,0 +1,1231 @@
+{
+  "year": 2025,
+  "teams": [
+    {
+      "id": "south-1",
+      "region": "South",
+      "seed": 1,
+      "name": "Auburn",
+      "wins": 4,
+      "eliminated": true
+    },
+    {
+      "id": "south-2",
+      "region": "South",
+      "seed": 2,
+      "name": "Michigan State",
+      "wins": 3,
+      "eliminated": true
+    },
+    {
+      "id": "south-3",
+      "region": "South",
+      "seed": 3,
+      "name": "Iowa State",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "south-4",
+      "region": "South",
+      "seed": 4,
+      "name": "Texas A&M",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "south-5",
+      "region": "South",
+      "seed": 5,
+      "name": "Michigan",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "south-6",
+      "region": "South",
+      "seed": 6,
+      "name": "Ole Miss",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "south-7",
+      "region": "South",
+      "seed": 7,
+      "name": "Marquette",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-8",
+      "region": "South",
+      "seed": 8,
+      "name": "Louisville",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-9",
+      "region": "South",
+      "seed": 9,
+      "name": "Creighton",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "south-10",
+      "region": "South",
+      "seed": 10,
+      "name": "New Mexico",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "south-11",
+      "region": "South",
+      "seed": 11,
+      "name": "San Diego St / North Carolina",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-12",
+      "region": "South",
+      "seed": 12,
+      "name": "UC San Diego",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-13",
+      "region": "South",
+      "seed": 13,
+      "name": "Yale",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-14",
+      "region": "South",
+      "seed": 14,
+      "name": "Lipscomb",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-15",
+      "region": "South",
+      "seed": 15,
+      "name": "Byrant",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "south-16",
+      "region": "South",
+      "seed": 16,
+      "name": "Alabama St / St Francis",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-1",
+      "region": "West",
+      "seed": 1,
+      "name": "Florida",
+      "wins": 6,
+      "eliminated": false
+    },
+    {
+      "id": "west-2",
+      "region": "West",
+      "seed": 2,
+      "name": "St Johns",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "west-3",
+      "region": "West",
+      "seed": 3,
+      "name": "Texas Tech",
+      "wins": 3,
+      "eliminated": true
+    },
+    {
+      "id": "west-4",
+      "region": "West",
+      "seed": 4,
+      "name": "Maryland",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "west-5",
+      "region": "West",
+      "seed": 5,
+      "name": "Memphis",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-6",
+      "region": "West",
+      "seed": 6,
+      "name": "Missouri",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-7",
+      "region": "West",
+      "seed": 7,
+      "name": "Kansas",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-8",
+      "region": "West",
+      "seed": 8,
+      "name": "UCONN",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "west-9",
+      "region": "West",
+      "seed": 9,
+      "name": "Oklahoma",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-10",
+      "region": "West",
+      "seed": 10,
+      "name": "Arkansas",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "west-11",
+      "region": "West",
+      "seed": 11,
+      "name": "Drake",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "west-12",
+      "region": "West",
+      "seed": 12,
+      "name": "Colorado St",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "west-13",
+      "region": "West",
+      "seed": 13,
+      "name": "Grand Canyon",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-14",
+      "region": "West",
+      "seed": 14,
+      "name": "UNCW",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-15",
+      "region": "West",
+      "seed": 15,
+      "name": "Omaha",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "west-16",
+      "region": "West",
+      "seed": 16,
+      "name": "Norfolk St.",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-1",
+      "region": "East",
+      "seed": 1,
+      "name": "Duke",
+      "wins": 4,
+      "eliminated": true
+    },
+    {
+      "id": "east-2",
+      "region": "East",
+      "seed": 2,
+      "name": "Alabama",
+      "wins": 3,
+      "eliminated": true
+    },
+    {
+      "id": "east-3",
+      "region": "East",
+      "seed": 3,
+      "name": "Wisconsin",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "east-4",
+      "region": "East",
+      "seed": 4,
+      "name": "Arizona",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "east-5",
+      "region": "East",
+      "seed": 5,
+      "name": "Oregon",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-6",
+      "region": "East",
+      "seed": 6,
+      "name": "BYU",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "east-7",
+      "region": "East",
+      "seed": 7,
+      "name": "St Mary's",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "east-8",
+      "region": "East",
+      "seed": 8,
+      "name": "Missisippi St",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-9",
+      "region": "East",
+      "seed": 9,
+      "name": "Baylor",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "east-10",
+      "region": "East",
+      "seed": 10,
+      "name": "Vanderibilt",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-11",
+      "region": "East",
+      "seed": 11,
+      "name": "VCU",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-12",
+      "region": "East",
+      "seed": 12,
+      "name": "Liberty",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-13",
+      "region": "East",
+      "seed": 13,
+      "name": "Akron",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-14",
+      "region": "East",
+      "seed": 14,
+      "name": "Montana",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-15",
+      "region": "East",
+      "seed": 15,
+      "name": "Robert Morris",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "east-16",
+      "region": "East",
+      "seed": 16,
+      "name": "American / Mt St Marys",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-1",
+      "region": "Midwest",
+      "seed": 1,
+      "name": "Houston",
+      "wins": 5,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-2",
+      "region": "Midwest",
+      "seed": 2,
+      "name": "Tennessee",
+      "wins": 3,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-3",
+      "region": "Midwest",
+      "seed": 3,
+      "name": "Kentucky",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-4",
+      "region": "Midwest",
+      "seed": 4,
+      "name": "Purdue",
+      "wins": 2,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-5",
+      "region": "Midwest",
+      "seed": 5,
+      "name": "Clemson",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-6",
+      "region": "Midwest",
+      "seed": 6,
+      "name": "Illinois",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-7",
+      "region": "Midwest",
+      "seed": 7,
+      "name": "UCLA",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-8",
+      "region": "Midwest",
+      "seed": 8,
+      "name": "Gonzaga",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-9",
+      "region": "Midwest",
+      "seed": 9,
+      "name": "Georgia",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-10",
+      "region": "Midwest",
+      "seed": 10,
+      "name": "Utah St",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-11",
+      "region": "Midwest",
+      "seed": 11,
+      "name": "Texas / Xavier",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-12",
+      "region": "Midwest",
+      "seed": 12,
+      "name": "McNeese",
+      "wins": 1,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-13",
+      "region": "Midwest",
+      "seed": 13,
+      "name": "High Point",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-14",
+      "region": "Midwest",
+      "seed": 14,
+      "name": "Troy",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-15",
+      "region": "Midwest",
+      "seed": 15,
+      "name": "Wofford",
+      "wins": 0,
+      "eliminated": true
+    },
+    {
+      "id": "midwest-16",
+      "region": "Midwest",
+      "seed": 16,
+      "name": "SIUE",
+      "wins": 0,
+      "eliminated": true
+    }
+  ],
+  "entries": [
+    {
+      "id": "josh-o",
+      "name": "Josh O",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 3,
+        "south-3": 2,
+        "south-12": 1,
+        "south-13": 1,
+        "south-15": 1,
+        "west-3": 3,
+        "west-12": 1,
+        "west-13": 1,
+        "west-15": 1,
+        "east-2": 3,
+        "east-11": 1,
+        "east-12": 1,
+        "east-13": 1,
+        "east-14": 1,
+        "midwest-1": 3,
+        "midwest-11": 1,
+        "midwest-12": 1,
+        "midwest-13": 1,
+        "midwest-14": 1
+      }
+    },
+    {
+      "id": "mike-d",
+      "name": "Mike D",
+      "entryFee": 10,
+      "picks": {
+        "south-7": 1,
+        "west-11": 1,
+        "west-15": 1,
+        "east-1": 1,
+        "east-12": 1,
+        "midwest-2": 1,
+        "midwest-7": 1
+      }
+    },
+    {
+      "id": "eric-b",
+      "name": "Eric B",
+      "entryFee": 10,
+      "picks": {
+        "south-3": 1,
+        "south-5": 1,
+        "south-9": 1,
+        "south-11": 1,
+        "south-12": 1,
+        "west-1": 1,
+        "west-4": 1,
+        "west-7": 1,
+        "west-8": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "east-6": 1,
+        "east-11": 1,
+        "east-12": 1,
+        "east-14": 1,
+        "midwest-2": 1,
+        "midwest-5": 1,
+        "midwest-6": 1,
+        "midwest-8": 1,
+        "midwest-10": 1,
+        "midwest-13": 1
+      }
+    },
+    {
+      "id": "keaton-t",
+      "name": "Keaton T",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-2": 1,
+        "south-3": 1,
+        "south-4": 1,
+        "south-11": 1,
+        "south-12": 1,
+        "west-1": 1,
+        "west-2": 1,
+        "west-3": 1,
+        "west-4": 1,
+        "west-10": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "west-14": 1,
+        "west-15": 1,
+        "east-1": 2,
+        "east-3": 1,
+        "east-4": 1,
+        "east-6": 1,
+        "east-7": 1,
+        "east-11": 1,
+        "east-12": 1,
+        "east-14": 1,
+        "midwest-1": 1,
+        "midwest-2": 1,
+        "midwest-4": 1,
+        "midwest-5": 1,
+        "midwest-6": 1,
+        "midwest-8": 1,
+        "midwest-12": 1,
+        "midwest-13": 1,
+        "midwest-14": 1
+      }
+    },
+    {
+      "id": "ron-d",
+      "name": "Ron D",
+      "entryFee": 10,
+      "picks": {
+        "south-2": 1,
+        "south-12": 1,
+        "south-13": 1,
+        "south-14": 1,
+        "south-15": 1,
+        "west-1": 1,
+        "west-2": 1,
+        "west-12": 1,
+        "west-13": 1,
+        "west-14": 1,
+        "east-1": 1,
+        "east-12": 1,
+        "east-13": 1,
+        "east-14": 1,
+        "midwest-13": 1,
+        "midwest-14": 1,
+        "midwest-15": 1
+      }
+    },
+    {
+      "id": "jon-r",
+      "name": "Jon R",
+      "entryFee": 10,
+      "picks": {
+        "south-2": 1,
+        "south-12": 1,
+        "west-2": 1,
+        "west-11": 1,
+        "east-1": 1,
+        "east-14": 1,
+        "midwest-2": 1,
+        "midwest-13": 1
+      }
+    },
+    {
+      "id": "kylene-d",
+      "name": "Kylene D",
+      "entryFee": 10,
+      "picks": {
+        "south-2": 1,
+        "south-12": 1,
+        "south-13": 1,
+        "west-11": 1,
+        "midwest-4": 1
+      }
+    },
+    {
+      "id": "ryan-b",
+      "name": "Ryan B",
+      "entryFee": 10,
+      "picks": {
+        "south-16": 1,
+        "west-16": 1,
+        "east-16": 1,
+        "midwest-6": 8,
+        "midwest-16": 1
+      }
+    },
+    {
+      "id": "matt-s",
+      "name": "Matt S",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-3": 1,
+        "south-12": 1,
+        "south-13": 2,
+        "west-1": 2,
+        "west-2": 1,
+        "west-12": 1,
+        "east-1": 1,
+        "east-2": 1,
+        "east-11": 1,
+        "east-12": 1,
+        "east-13": 1,
+        "midwest-1": 2,
+        "midwest-2": 1,
+        "midwest-12": 1,
+        "midwest-13": 1
+      }
+    },
+    {
+      "id": "chris-d",
+      "name": "Chris D",
+      "entryFee": 10,
+      "picks": {
+        "south-6": 4,
+        "west-11": 4,
+        "east-4": 4,
+        "midwest-1": 4
+      }
+    },
+    {
+      "id": "kevin-s",
+      "name": "Kevin S",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 2,
+        "south-2": 2,
+        "south-13": 1,
+        "west-1": 2,
+        "west-2": 2,
+        "west-13": 1,
+        "east-1": 2,
+        "east-2": 2,
+        "east-13": 1,
+        "midwest-1": 2,
+        "midwest-2": 2,
+        "midwest-13": 1
+      }
+    },
+    {
+      "id": "cary-s",
+      "name": "Cary S",
+      "entryFee": 10,
+      "picks": {
+        "south-3": 1,
+        "south-9": 1,
+        "west-7": 1,
+        "west-11": 1,
+        "east-1": 1,
+        "east-9": 1,
+        "east-14": 1,
+        "midwest-4": 1,
+        "midwest-8": 1
+      }
+    },
+    {
+      "id": "terry-s",
+      "name": "Terry S",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-3": 1,
+        "west-3": 1,
+        "west-11": 1,
+        "east-1": 2,
+        "east-11": 1,
+        "midwest-1": 2
+      }
+    },
+    {
+      "id": "tony-m",
+      "name": "Tony M",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-2": 1,
+        "south-4": 1,
+        "south-9": 1,
+        "south-12": 1,
+        "south-13": 1,
+        "west-1": 1,
+        "west-2": 1,
+        "west-3": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "east-1": 1,
+        "east-6": 1,
+        "east-11": 1,
+        "east-12": 1,
+        "midwest-1": 1,
+        "midwest-8": 1,
+        "midwest-10": 1
+      }
+    },
+    {
+      "id": "chris-b",
+      "name": "Chris B",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-2": 1,
+        "south-3": 1,
+        "south-11": 1,
+        "south-12": 1,
+        "south-13": 1,
+        "south-14": 1,
+        "south-15": 1,
+        "south-16": 1,
+        "west-1": 1,
+        "west-2": 1,
+        "west-8": 1,
+        "west-10": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "west-13": 1,
+        "west-14": 1,
+        "west-15": 1,
+        "west-16": 1,
+        "east-1": 2,
+        "east-2": 1,
+        "east-4": 1,
+        "east-11": 1,
+        "east-12": 1,
+        "east-13": 1,
+        "east-14": 1,
+        "east-15": 1,
+        "east-16": 1,
+        "midwest-1": 1,
+        "midwest-2": 1,
+        "midwest-10": 1,
+        "midwest-11": 1,
+        "midwest-12": 1,
+        "midwest-13": 1,
+        "midwest-14": 1,
+        "midwest-15": 1,
+        "midwest-16": 1
+      }
+    },
+    {
+      "id": "james-h",
+      "name": "James H",
+      "entryFee": 10,
+      "picks": {
+        "south-11": 2,
+        "south-12": 2,
+        "south-13": 2,
+        "west-1": 1,
+        "west-2": 1,
+        "east-2": 3,
+        "east-3": 1,
+        "east-4": 3,
+        "midwest-1": 4,
+        "midwest-6": 1
+      }
+    },
+    {
+      "id": "josh-u",
+      "name": "Josh U",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 2,
+        "south-2": 1,
+        "west-1": 7,
+        "east-1": 10,
+        "midwest-1": 1,
+        "midwest-2": 1,
+        "midwest-3": 1
+      }
+    },
+    {
+      "id": "marcus-b",
+      "name": "Marcus B",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 2,
+        "south-2": 1,
+        "south-11": 2,
+        "west-1": 1,
+        "west-2": 1,
+        "west-12": 2,
+        "west-13": 1,
+        "east-1": 1,
+        "east-2": 1,
+        "east-6": 1,
+        "midwest-2": 1,
+        "midwest-5": 2,
+        "midwest-13": 1
+      }
+    },
+    {
+      "id": "nathan-b",
+      "name": "Nathan B",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-3": 1,
+        "south-9": 1,
+        "south-11": 1,
+        "west-2": 1,
+        "west-11": 1,
+        "east-4": 1,
+        "east-13": 1,
+        "midwest-1": 2,
+        "midwest-12": 1
+      }
+    },
+    {
+      "id": "ryan-m",
+      "name": "Ryan M",
+      "entryFee": 10,
+      "picks": {
+        "south-2": 1,
+        "south-12": 1,
+        "south-13": 1,
+        "south-14": 1,
+        "west-2": 1,
+        "west-12": 1,
+        "east-11": 1,
+        "east-12": 1,
+        "east-14": 1,
+        "midwest-2": 1,
+        "midwest-11": 1,
+        "midwest-12": 1,
+        "midwest-13": 1
+      }
+    },
+    {
+      "id": "jason-r",
+      "name": "Jason R",
+      "entryFee": 10,
+      "picks": {
+        "south-8": 1,
+        "south-9": 1,
+        "south-11": 1,
+        "west-1": 1,
+        "west-3": 1,
+        "west-4": 1,
+        "west-7": 1,
+        "west-8": 1,
+        "east-1": 1,
+        "east-2": 1,
+        "east-4": 1,
+        "midwest-6": 1,
+        "midwest-8": 1
+      }
+    },
+    {
+      "id": "bill-o",
+      "name": "Bill O",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "south-10": 1,
+        "south-12": 1,
+        "west-2": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "east-1": 1,
+        "east-6": 1,
+        "midwest-14": 1
+      }
+    },
+    {
+      "id": "kelli-s",
+      "name": "Kelli S",
+      "entryFee": 10,
+      "picks": {
+        "south-3": 1,
+        "south-9": 1,
+        "south-13": 1,
+        "west-7": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "east-1": 1,
+        "east-3": 1,
+        "east-14": 1,
+        "midwest-1": 1,
+        "midwest-3": 1,
+        "midwest-10": 1,
+        "midwest-15": 1
+      }
+    },
+    {
+      "id": "kent-b",
+      "name": "Kent B",
+      "entryFee": 10,
+      "picks": {
+        "south-2": 1,
+        "south-3": 1,
+        "south-9": 1,
+        "south-12": 1,
+        "south-13": 1,
+        "south-14": 1,
+        "south-15": 1,
+        "west-1": 1,
+        "west-11": 1,
+        "west-12": 1,
+        "west-13": 1,
+        "west-14": 1,
+        "west-15": 1,
+        "east-1": 1,
+        "east-3": 1,
+        "east-12": 1,
+        "east-13": 1,
+        "east-14": 1,
+        "east-15": 1,
+        "midwest-1": 1,
+        "midwest-6": 2,
+        "midwest-12": 1,
+        "midwest-13": 1,
+        "midwest-14": 1,
+        "midwest-15": 1,
+        "midwest-16": 1
+      }
+    },
+    {
+      "id": "oz",
+      "name": "Oz",
+      "entryFee": 10,
+      "picks": {
+        "south-4": 1,
+        "south-5": 1,
+        "south-7": 1,
+        "west-1": 1,
+        "west-11": 2,
+        "east-14": 1,
+        "midwest-2": 1,
+        "midwest-12": 1
+      }
+    },
+    {
+      "id": "aaryn-p",
+      "name": "Aaryn P",
+      "entryFee": 10,
+      "picks": {
+        "south-1": 1,
+        "west-4": 1,
+        "west-5": 1,
+        "east-5": 1,
+        "east-10": 1,
+        "midwest-5": 1
+      }
+    }
+  ],
+  "completedRounds": 6,
+  "reference": [
+    {
+      "name": "Josh O",
+      "spent": 326,
+      "winnings": 315.24246376811595,
+      "bonuses": 33.15,
+      "paid": true
+    },
+    {
+      "name": "Mike D",
+      "spent": 76,
+      "winnings": 53.232801932367146,
+      "bonuses": 0.57,
+      "paid": false
+    },
+    {
+      "name": "Eric B",
+      "spent": 214,
+      "winnings": 142.4980193236715,
+      "bonuses": 4.29,
+      "paid": false
+    },
+    {
+      "name": "Keaton T",
+      "spent": 389,
+      "winnings": 328.51680555555544,
+      "bonuses": 56.72,
+      "paid": false
+    },
+    {
+      "name": "Ron D",
+      "spent": 136,
+      "winnings": 113.99512681159419,
+      "bonuses": 4.86,
+      "paid": false
+    },
+    {
+      "name": "Jon R",
+      "spent": 96,
+      "winnings": 71.18099637681159,
+      "bonuses": 0.57,
+      "paid": false
+    },
+    {
+      "name": "Kylene D",
+      "spent": 50,
+      "winnings": 33.08569444444444,
+      "bonuses": 0,
+      "paid": false
+    },
+    {
+      "name": "Ryan B",
+      "spent": 104,
+      "winnings": 36.75,
+      "bonuses": 0,
+      "paid": false
+    },
+    {
+      "name": "Matt S",
+      "spent": 241,
+      "winnings": 301.9149033816425,
+      "bonuses": 10.86,
+      "paid": false
+    },
+    {
+      "name": "Chris D",
+      "spent": 212,
+      "winnings": 250.5742995169082,
+      "bonuses": 2.28,
+      "paid": false
+    },
+    {
+      "name": "Kevin S",
+      "spent": 324,
+      "winnings": 416.7143961352657,
+      "bonuses": 4.56,
+      "paid": false
+    },
+    {
+      "name": "Cary S",
+      "spent": 100,
+      "winnings": 59.6096074879227,
+      "bonuses": 0.57,
+      "paid": false
+    },
+    {
+      "name": "Terry S",
+      "spent": 146,
+      "winnings": 179.35166666666666,
+      "bonuses": 10.28,
+      "paid": false
+    },
+    {
+      "name": "Tony M",
+      "spent": 222,
+      "winnings": 223.92150362318839,
+      "bonuses": 13.43,
+      "paid": false
+    },
+    {
+      "name": "Chris B",
+      "spent": 336,
+      "winnings": 278.5105555555555,
+      "bonuses": 49.29,
+      "paid": false
+    },
+    {
+      "name": "James H",
+      "spent": 278,
+      "winnings": 307.8687077294686,
+      "bonuses": 2.85,
+      "paid": false
+    },
+    {
+      "name": "Josh U",
+      "spent": 452,
+      "winnings": 821.9040277777779,
+      "bonuses": 11.4,
+      "paid": false
+    },
+    {
+      "name": "Marcus B",
+      "spent": 226,
+      "winnings": 217.2232306763285,
+      "bonuses": 9.72,
+      "paid": false
+    },
+    {
+      "name": "Nathan B",
+      "spent": 142,
+      "winnings": 133.5342572463768,
+      "bonuses": 5.43,
+      "paid": false
+    },
+    {
+      "name": "Ryan M",
+      "spent": 110,
+      "winnings": 49.677638888888886,
+      "bonuses": 7.44,
+      "paid": false
+    },
+    {
+      "name": "Jason R",
+      "spent": 171,
+      "winnings": 162.21832125603862,
+      "bonuses": 8.57,
+      "paid": false
+    },
+    {
+      "name": "Bill O",
+      "spent": 101,
+      "winnings": 81.1129649758454,
+      "bonuses": 4.86,
+      "paid": false
+    },
+    {
+      "name": "Kelli S",
+      "spent": 141,
+      "winnings": 96.57193236714976,
+      "bonuses": 4.86,
+      "paid": false
+    },
+    {
+      "name": "Kent B",
+      "spent": 224,
+      "winnings": 178.51995169082124,
+      "bonuses": 9.15,
+      "paid": false
+    },
+    {
+      "name": "Oz",
+      "spent": 100,
+      "winnings": 107.6292693236715,
+      "bonuses": 4.29,
+      "paid": true
+    },
+    {
+      "name": "Aaryn P",
+      "spent": 81,
+      "winnings": 36.6408574879227,
+      "bonuses": 0.57,
+      "paid": false
+    }
+  ]
+}
