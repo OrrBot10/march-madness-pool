@@ -9,9 +9,9 @@ import { computePool } from "@/lib/pool/engine";
 export default async function StandingsPage() {
   const season = await getCurrentSeason();
   if (!season) return <p>No season yet.</p>;
-  const { teams, entries } = await getSeasonData(season.year);
-  const result = computePool({ teams, entries, completedRounds: season.completedRounds });
-  const lastRound = ROUNDS[season.completedRounds - 1];
+  const { teams, entries, completedRounds } = await getSeasonData(season.year);
+  const result = computePool({ teams, entries, completedRounds });
+  const lastRound = ROUNDS[completedRounds - 1];
   const inGreen = result.entries.filter((e) => e.net > 0).length;
 
   return (

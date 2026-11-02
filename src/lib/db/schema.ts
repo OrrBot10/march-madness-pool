@@ -1,26 +1,64 @@
 import { boolean, integer, pgTable, primaryKey, serial, text, timestamp } from "drizzle-orm/pg-core";
 
+// Change these tables, then run `npm run db:generate` to write a migration into drizzle/.
+
 export const seasons = pgTable("seasons", {
   year: integer("year").primaryKey(),
   /** setup: bracket not published; open: taking picks; locked: games under way; complete: settled */
   status: text("status", { enum: ["setup", "open", "locked", "complete"] }).notNull(),
+  /** The season the site shows. Exactly one should be active. */
+  active: boolean("active").notNull().default(false),
   /** Tip-off of the first Round of 64 game. Picks lock at this time. */
   lockAt: timestamp("lock_at", { withTimezone: true }).notNull(),
-  completedRounds: integer("completed_rounds").notNull().default(0),
+  /** First day of the tournament (First Four), YYYYMMDD Eastern. Null for seasons not tied to ESPN. */
+  startDay: text("start_day"),
+  /** For testing with a past tournament: only use games played on or before this day (YYYYMMDD). */
+  asOfDay: text("as_of_day"),
+  /** Days already fetched after they ended with every game final; never fetched again. */
+  syncedDays: text("synced_days").array().notNull().default([]),
+  lastSyncAt: timestamp("last_sync_at", { withTimezone: true }),
+  lastSyncError: text("last_sync_error"),
 });
 
+/** The 64 pool slots. A First Four pair is one slot with two ESPN ids. */
 export const teams = pgTable(
   "teams",
   {
     year: integer("year").notNull(),
-    id: text("id").notNull(),
+    id: text("id").notNull(), // "<region>-<seed>", e.g. "midwest-11"
     region: text("region").notNull(),
     seed: integer("seed").notNull(),
     name: text("name").notNull(),
-    wins: integer("wins").notNull().default(0),
-    eliminated: boolean("eliminated").notNull().default(false),
+    espnIds: text("espn_ids").array().notNull().default([]),
   },
   (t) => [primaryKey({ columns: [t.year, t.id] })],
+);
+
+/** Tournament games as ESPN reports them. Wins and payouts are derived from these. */
+export const games = pgTable(
+  "games",
+  {
+    year: integer("year").notNull(),
+    espnId: text("espn_id").notNull(),
+    round: integer("round").notNull(), // 0 First Four, 1 Round of 64 … 6 championship
+    region: text("region"),
+    startAt: timestamp("start_at", { withTimezone: true }).notNull(),
+    state: text("state", { enum: ["pre", "in", "post"] }).notNull(),
+    detail: text("detail").notNull().default(""),
+    aEspnId: text("a_espn_id"),
+    aName: text("a_name").notNull(),
+    aSeed: integer("a_seed"),
+    aScore: integer("a_score"),
+    bEspnId: text("b_espn_id"),
+    bName: text("b_name").notNull(),
+    bSeed: integer("b_seed"),
+    bScore: integer("b_score"),
+    /** ESPN's winner, once final. */
+    winnerEspnId: text("winner_espn_id"),
+    /** Set by the admin to fix or fill in a result; wins over ESPN and survives syncs. */
+    overrideWinnerEspnId: text("override_winner_espn_id"),
+  },
+  (t) => [primaryKey({ columns: [t.year, t.espnId] })],
 );
 
 export const people = pgTable("people", {
@@ -33,7 +71,7 @@ export const people = pgTable("people", {
 export const entries = pgTable("entries", {
   id: serial("id").primaryKey(),
   year: integer("year").notNull(),
-  /** Null for entries imported from spreadsheets. */
+  /** Null for entries imported from spreadsheets or added by the admin for someone without a login. */
   personId: integer("person_id"),
   name: text("name").notNull(),
   entryFee: integer("entry_fee").notNull().default(10),
@@ -50,44 +88,3 @@ export const picks = pgTable(
   },
   (t) => [primaryKey({ columns: [t.entryId, t.teamId] })],
 );
-
-/** Kept in sync with the tables above; run on startup until we move to drizzle-kit migrations. */
-export const BOOTSTRAP_SQL = `
-create table if not exists seasons (
-  year integer primary key,
-  status text not null,
-  lock_at timestamptz not null,
-  completed_rounds integer not null default 0
-);
-create table if not exists teams (
-  year integer not null,
-  id text not null,
-  region text not null,
-  seed integer not null,
-  name text not null,
-  wins integer not null default 0,
-  eliminated boolean not null default false,
-  primary key (year, id)
-);
-create table if not exists people (
-  id serial primary key,
-  name text not null,
-  email text unique,
-  is_admin boolean not null default false
-);
-create table if not exists entries (
-  id serial primary key,
-  year integer not null,
-  person_id integer,
-  name text not null,
-  entry_fee integer not null default 10,
-  paid boolean not null default false,
-  updated_at timestamptz not null default now()
-);
-create table if not exists picks (
-  entry_id integer not null,
-  team_id text not null,
-  shares integer not null,
-  primary key (entry_id, team_id)
-);
-`;

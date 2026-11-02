@@ -41,6 +41,11 @@ async function Account() {
   }
   return (
     <form action={signOut} className="flex items-center gap-2 text-sm">
+      {person.isAdmin && (
+        <Link href="/admin" className="rounded-md bg-white/10 px-2.5 py-1 font-medium text-white hover:bg-white/20">
+          Admin
+        </Link>
+      )}
       <span className="hidden text-white/80 sm:inline">{person.name}</span>
       <button className="rounded-md border border-white/30 px-2.5 py-1 text-white/90 hover:bg-white/10">Sign out</button>
     </form>

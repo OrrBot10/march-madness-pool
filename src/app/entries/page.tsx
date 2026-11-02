@@ -6,8 +6,8 @@ import { computePool } from "@/lib/pool/engine";
 export default async function AllPicksPage() {
   const season = await getCurrentSeason();
   if (!season) return <p>No season yet.</p>;
-  const { teams, entries } = await getSeasonData(season.year);
-  const result = computePool({ teams, entries, completedRounds: season.completedRounds });
+  const { teams, entries, completedRounds } = await getSeasonData(season.year);
+  const result = computePool({ teams, entries, completedRounds });
   const teamById = new Map(teams.map((t) => [t.id, t]));
 
   return (

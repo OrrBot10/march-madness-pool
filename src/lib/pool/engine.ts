@@ -63,6 +63,7 @@ export interface EntryResult {
   pctReturn: number;
   /** Shares still alive (team not eliminated). */
   liveShares: number;
+  /** Owns shares, and every one of their teams has lost. */
   eliminated: boolean;
 }
 
@@ -130,7 +131,9 @@ export function computePool({ teams, entries, completedRounds }: PoolInput): Poo
     let winnings = 0;
     let bonusTotal = 0;
     let liveShares = 0;
+    let ownedShares = 0;
     for (const [teamId, shares] of Object.entries(entry.picks)) {
+      ownedShares += shares;
       const team = teamById.get(teamId)!;
       spent += shares * priceForSeed(team.seed);
       winnings += shares * returnPerShare[teamId];
@@ -149,7 +152,7 @@ export function computePool({ teams, entries, completedRounds }: PoolInput): Poo
       net,
       pctReturn: cost > 0 ? net / cost : 0,
       liveShares,
-      eliminated: liveShares === 0,
+      eliminated: ownedShares > 0 && liveShares === 0,
     };
   });
 

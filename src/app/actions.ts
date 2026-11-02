@@ -8,6 +8,7 @@ import {
   findOrCreatePerson,
   getCurrentSeason,
   getEntry,
+  getSeason,
   getSeasonData,
   picksLocked,
   replacePicks,
@@ -41,6 +42,9 @@ export async function newEntry(_: FormState, form: FormData): Promise<FormState>
   if (!person) redirect("/signin");
   const season = await getCurrentSeason();
   if (!season || picksLocked(season)) return { error: "Picks are locked for this season." };
+  // One entry per person.
+  const existing = (await getSeasonData(season.year)).entries.find((e) => e.personId === person.id);
+  if (existing) redirect(`/picks/${existing.entryId}`);
   const name = String(form.get("name") ?? "").trim() || person.name;
   const entry = await createEntry(season.year, person.id, name);
   redirect(`/picks/${entry.id}`);
@@ -53,8 +57,8 @@ export async function savePicks(entryId: number, shares: Record<string, number>)
   if (!person) return { error: "Your session expired. Sign in again." };
   const entry = await getEntry(entryId);
   if (!entry || (entry.personId !== person.id && !person.isAdmin)) return { error: "That entry isn't yours." };
-  const season = await getCurrentSeason();
-  if (!season || season.year !== entry.year) return { error: "That entry isn't in the current season." };
+  const season = await getSeason(entry.year);
+  if (!season) return { error: "That entry's season no longer exists." };
   if (picksLocked(season) && !person.isAdmin) return { error: "Picks locked at tip-off." };
 
   const parsed = picksSchema.safeParse(shares);

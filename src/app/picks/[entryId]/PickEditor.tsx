@@ -70,6 +70,7 @@ export function PickEditor(props: {
                     Others
                   </th>
                   <th className="px-2 py-1.5 text-center font-medium">Shares</th>
+                  <th className="w-14 px-2 py-1.5 text-right font-medium">Cost</th>
                 </tr>
               </thead>
               <tbody>
@@ -120,6 +121,9 @@ export function PickEditor(props: {
                             </button>
                           </div>
                         </td>
+                        <td className="px-2 py-1.5 text-right font-medium tabular">
+                          {n > 0 ? money(n * priceForSeed(t.seed), { whole: true }) : ""}
+                        </td>
                       </tr>
                     );
                   })}
@@ -129,17 +133,19 @@ export function PickEditor(props: {
         ))}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 border-t border-line bg-surface/95 backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 bg-navy text-white shadow-[0_-4px_16px_rgba(0,0,0,0.15)]">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <div className="text-sm tabular">
-            <span className="font-semibold">{totals.count} shares</span>
-            <span className="text-muted"> · {money(totals.cost, { whole: true })} + {money(entryFee, { whole: true })} entry = </span>
-            <span className="font-semibold">{money(totals.cost + entryFee, { whole: true })}</span>
+          <div className="tabular" aria-live="polite">
+            <div className="text-xs uppercase tracking-wide text-white/70">Your total</div>
+            <div className="text-3xl font-bold leading-tight">{money(totals.cost + entryFee, { whole: true })}</div>
+            <div className="text-xs text-white/80">
+              {totals.count} {totals.count === 1 ? "share" : "shares"} = {money(totals.cost, { whole: true })} + {money(entryFee, { whole: true })} entry fee
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            {status?.error && <span className="text-sm text-loss">{status.error}</span>}
-            {status?.ok && !dirty && <span className="text-sm text-gain">{status.ok}</span>}
-            {dirty && !pending && <span className="text-sm text-muted">Unsaved changes</span>}
+            {status?.error && <span className="text-sm text-[#ffb4a8]">{status.error}</span>}
+            {status?.ok && !dirty && <span className="text-sm text-[#9be7b0]">{status.ok}</span>}
+            {dirty && !pending && <span className="text-sm text-white/80">Unsaved changes</span>}
             {!locked && (
               <button
                 onClick={save}

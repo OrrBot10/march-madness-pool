@@ -2,6 +2,8 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { connection } from "next/server";
 import { eq } from "drizzle-orm";
+import { notFound } from "next/navigation";
+import { adminEmails } from "@/lib/data";
 import { getDb } from "@/lib/db";
 import { people } from "@/lib/db/schema";
 
@@ -43,5 +45,14 @@ export async function getCurrentPerson() {
   if (!mac || mac.length !== expected.length || !timingSafeEqual(Buffer.from(mac), Buffer.from(expected))) return null;
   const db = await getDb();
   const [person] = await db.select().from(people).where(eq(people.id, Number(value)));
-  return person ?? null;
+  if (!person) return null;
+  // Admins are listed in ADMIN_EMAILS (default: Josh), so access follows the setting without a database edit.
+  return { ...person, isAdmin: person.isAdmin || (!!person.email && adminEmails().includes(person.email)) };
+}
+
+/** For admin pages and actions: the signed-in admin, or a 404 for everyone else. */
+export async function requireAdmin() {
+  const person = await getCurrentPerson();
+  if (!person?.isAdmin) notFound();
+  return person;
 }

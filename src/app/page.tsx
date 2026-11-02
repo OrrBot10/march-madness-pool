@@ -8,8 +8,8 @@ export default async function Home() {
   const season = await getCurrentSeason();
   if (!season) return <p>The next pool hasn’t been set up yet. Check back after Selection Sunday.</p>;
 
-  const { teams, entries } = await getSeasonData(season.year);
-  const result = computePool({ teams, entries, completedRounds: season.completedRounds });
+  const { teams, entries, completedRounds } = await getSeasonData(season.year);
+  const result = computePool({ teams, entries, completedRounds });
   const locked = picksLocked(season);
   const top = teams
     .map((t) => ({ ...t, shares: result.sharesByTeam[t.id] }))
