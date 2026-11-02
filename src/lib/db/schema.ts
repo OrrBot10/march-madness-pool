@@ -68,6 +68,17 @@ export const people = pgTable("people", {
   isAdmin: boolean("is_admin").notNull().default(false),
 });
 
+/** One-time sign-in links. Only a hash of the token is stored. */
+export const loginTokens = pgTable("login_tokens", {
+  id: serial("id").primaryKey(),
+  tokenHash: text("token_hash").notNull().unique(),
+  email: text("email").notNull(),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  usedAt: timestamp("used_at", { withTimezone: true }),
+});
+
 export const entries = pgTable("entries", {
   id: serial("id").primaryKey(),
   year: integer("year").notNull(),

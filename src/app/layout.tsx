@@ -19,7 +19,7 @@ const robotoCondensed = Roboto_Condensed({
 
 export const metadata: Metadata = {
   title: { default: SITE.name, template: `%s · ${SITE.name}` },
-  description: `${SITE.tagline}. Buy shares in tournament teams and collect dividends every round they win.`,
+  description: SITE.tagline,
 };
 
 async function Account() {
@@ -53,9 +53,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 pt-3 pb-2">
             <Link href="/" className="flex items-center gap-2.5">
               <BallMark className="h-9 w-9 shrink-0" />
-              <span className="leading-none">
-                <span className="display block text-xl font-extrabold uppercase tracking-wide">{SITE.name}</span>
-                <span className="mt-0.5 block text-[11px] text-sky">{SITE.tagline}</span>
+              <span className="display text-lg leading-tight font-extrabold uppercase tracking-wide sm:text-xl">
+                {SITE.titleLead} <span className="text-sky">{SITE.titleRest}</span>
               </span>
             </Link>
             <Suspense fallback={<span className="h-8 w-16" />}>
@@ -69,8 +68,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <footer className="border-t border-line">
           <div className="mx-auto max-w-6xl space-y-1 px-4 py-6 text-xs text-muted">
             <p>
-              <strong className="text-ink">{SITE.name}</strong> is {SITE.owner}’s private pool, running since {SITE.since}.
-              Questions? Ask Josh.
+              A private pool run by <strong className="text-ink">{SITE.owner}</strong> since {SITE.since}. Questions? Ask
+              Josh.
             </p>
             <p>
               Settle up via Venmo {SITE.venmo} or PayPal {SITE.paypal}. Not affiliated with the NCAA.

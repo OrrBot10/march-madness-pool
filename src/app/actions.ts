@@ -1,11 +1,13 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { redeemLoginLink, sendLoginLink } from "@/lib/auth";
+import { displayName, hasLastName } from "@/lib/names";
 import {
   createEntry,
-  findOrCreatePerson,
   getCurrentSeason,
   getEntry,
   getSeason,
@@ -15,19 +17,35 @@ import {
 } from "@/lib/data";
 import { clearSession, getCurrentPerson, setSession } from "@/lib/session";
 
-export type FormState = { error?: string; ok?: string } | undefined;
+export type FormState = { error?: string; ok?: string; devLink?: string } | undefined;
 
 const signInSchema = z.object({
-  name: z.string().trim().min(2, "Enter your name, e.g. Josh O"),
+  name: z
+    .string()
+    .trim()
+    .min(3, "Enter your full name")
+    .refine(hasLastName, "Enter your first and last name (standings show “Josh O”)"),
   email: z.email("Enter a valid email"),
 });
 
-// TEMPORARY: signs in on name + email with no verification. To be replaced by emailed sign-in links
-// before this goes anywhere but a local machine.
+/** Emails a one-time sign-in link. Nobody is signed in until they open it. */
 export async function signIn(_: FormState, form: FormData): Promise<FormState> {
   const parsed = signInSchema.safeParse({ name: form.get("name"), email: form.get("email") });
   if (!parsed.success) return { error: parsed.error.issues[0].message };
-  const person = await findOrCreatePerson(parsed.data.name, parsed.data.email);
+  const h = await headers();
+  const origin = `${h.get("x-forwarded-proto") ?? "http"}://${h.get("host")}`;
+  try {
+    const { devLink } = await sendLoginLink({ ...parsed.data, origin });
+    return { ok: `Check ${parsed.data.email} for your sign-in link. It works for 30 minutes.`, devLink };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Couldn't send the email" };
+  }
+}
+
+/** Second step of sign-in, run by a button click so email link scanners can't use up the link. */
+export async function finishSignIn(token: string): Promise<FormState> {
+  const person = await redeemLoginLink(token);
+  if (!person) return { error: "That link has expired or was already used. Request a new one." };
   await setSession(person.id);
   redirect("/picks");
 }
@@ -37,15 +55,16 @@ export async function signOut() {
   redirect("/");
 }
 
-export async function newEntry(_: FormState, form: FormData): Promise<FormState> {
+export async function newEntry(): Promise<FormState> {
   const person = await getCurrentPerson();
   if (!person) redirect("/signin");
   const season = await getCurrentSeason();
   if (!season || picksLocked(season)) return { error: "Picks are locked for this season." };
-  // One entry per person.
-  const existing = (await getSeasonData(season.year)).entries.find((e) => e.personId === person.id);
+  // One entry per person, shown as first name + last initial.
+  const { entries } = await getSeasonData(season.year);
+  const existing = entries.find((e) => e.personId === person.id);
   if (existing) redirect(`/picks/${existing.entryId}`);
-  const name = String(form.get("name") ?? "").trim() || person.name;
+  const name = displayName(person.name, entries.map((e) => e.name));
   const entry = await createEntry(season.year, person.id, name);
   redirect(`/picks/${entry.id}`);
 }

@@ -18,7 +18,7 @@ export interface SeasonEntry extends Entry {
 }
 
 /** How stale results may get before a page view triggers a background ESPN sync. */
-const SYNC_EVERY_MS = 2 * 60 * 1000;
+const SYNC_EVERY_MS = 5 * 60 * 1000;
 
 export async function getCurrentSeason(): Promise<Season | null> {
   // Picks and results change constantly; never bake them into the prerendered shell.

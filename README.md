@@ -38,7 +38,7 @@ npx tsx scripts/import-history.ts "C:\Users\joshr\OneDrive\Desktop\March Madness
 
 `src/lib/espn.ts` reads ESPN's public scoreboard, one request per tournament day. After Selection Sunday, Admin →
 "Start a new season" builds the 64-slot bracket from the First Four and Round of 64 games. During the tournament,
-any page view syncs results in the background once they are two minutes old; `/api/cron/sync` (with
+any page view syncs results in the background once they are five minutes old; `/api/cron/sync` (with
 `Authorization: Bearer $CRON_SECRET`) does the same for a scheduler. A round pays out once all its games are final.
 An admin can override any game's winner.
 

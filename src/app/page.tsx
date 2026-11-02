@@ -27,7 +27,7 @@ export default async function Home() {
         <CourtLines className="text-white/[0.09]" />
         <div className="relative">
         <div className="display text-sm font-semibold uppercase tracking-widest text-sky">
-          {SITE.name} · {season.year}
+          {season.year} pool
         </div>
         <h1 className="mt-1 text-3xl sm:text-4xl">
           {locked ? "Picks are locked. Enjoy the games!" : "Picks are open"}

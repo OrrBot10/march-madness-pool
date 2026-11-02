@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createEntry, findOrCreatePerson, getSeason } from "@/lib/data";
 import { getDb } from "@/lib/db";
+import { displayName } from "@/lib/names";
 import { entries, picks, seasons, teams } from "@/lib/db/schema";
 import { requireAdmin } from "@/lib/session";
 import { clearSyncedDays, createSeasonFromEspn, refreshBracket, setOverride, syncSeason } from "@/lib/sync";
@@ -131,7 +132,7 @@ export async function setPaid(entryId: number, paid: boolean) {
 }
 
 const addEntrySchema = z.object({
-  name: z.string().trim().min(2, "Enter the entry name"),
+  name: z.string().trim().min(2, "Enter their full name"),
   email: z.union([z.literal(""), z.email("Enter a valid email or leave it blank")]),
 });
 
@@ -149,7 +150,9 @@ export async function addEntry(year: number, _: AdminState, form: FormData): Pro
       .where(and(eq(entries.year, year), eq(entries.personId, person.id)));
     if (existing) return { error: `${parsed.data.email} already has an entry (${existing.name}). One per person.` };
   }
-  const entry = await createEntry(year, person?.id ?? null, parsed.data.name);
+  const db = await getDb();
+  const taken = (await db.select({ name: entries.name }).from(entries).where(eq(entries.year, year))).map((e) => e.name);
+  const entry = await createEntry(year, person?.id ?? null, displayName(parsed.data.name, taken));
   redirect(`/picks/${entry.id}`);
 }
 

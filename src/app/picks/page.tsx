@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentSeason, getSeasonData, picksLocked } from "@/lib/data";
+import { displayName } from "@/lib/names";
 import { getCurrentPerson } from "@/lib/session";
 import { NewEntryForm } from "./NewEntryForm";
 
@@ -27,7 +28,7 @@ export default async function MyPicksPage() {
               })}).`}
         </p>
       </div>
-      {!picksLocked(season) && <NewEntryForm defaultName={person.name} />}
+      {!picksLocked(season) && <NewEntryForm shownAs={displayName(person.name, entries.map((e) => e.name))} />}
     </div>
   );
 }

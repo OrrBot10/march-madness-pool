@@ -196,8 +196,8 @@ export function AddEntryForm({ year }: { year: number }) {
   return (
     <form action={action} className="flex flex-wrap items-end gap-3">
       <label className="text-sm">
-        <span className="block font-medium">Entry name</span>
-        <input name="name" required placeholder="Ron D" className={`mt-1 ${input}`} />
+        <span className="block font-medium">Full name</span>
+        <input name="name" required placeholder="Ron Deiter (shows as Ron D)" className={`mt-1 w-56 ${input}`} />
       </label>
       <label className="text-sm">
         <span className="block font-medium">Their email (optional)</span>

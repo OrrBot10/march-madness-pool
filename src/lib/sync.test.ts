@@ -21,8 +21,9 @@ const fakeEspn = async (day: string) => parseScoreboard(fixture[day] ?? { events
 let db: DB;
 
 beforeEach(async () => {
-  db = drizzle(new PGlite(), { schema });
-  await migrate(db, { migrationsFolder: path.join(root, "drizzle") });
+  const local = drizzle(new PGlite(), { schema });
+  await migrate(local, { migrationsFolder: path.join(root, "drizzle") });
+  db = local as unknown as DB;
   // Same as the admin "new season" flow: First Four + Round of 64 days only.
   const opening = ["20260317", "20260318", "20260319", "20260320"].flatMap((d) => parseScoreboard(fixture[d]));
   await insertSeason(db, { year: 2026, startDay: "20260317", games: opening, status: "locked", asOfDay: "20260318" });

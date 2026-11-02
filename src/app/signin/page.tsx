@@ -6,12 +6,10 @@ export default function SignInPage() {
     <div className="mx-auto max-w-sm">
       <h1 className="text-2xl">Sign in</h1>
       <p className="mt-1 text-sm text-muted">
-        {SITE.name} is {SITE.owner}’s private March Madness pool. Use the email Josh sends pool updates to.
+        This is {SITE.owner}’s private March Madness pool. Enter your name and email and we’ll send you a link.
+        No password needed.
       </p>
       <SignInForm />
-      <p className="mt-6 rounded-md bg-chip p-3 text-xs text-muted">
-        Local test version: there’s no email check yet. The real site will email you a one-click sign-in link.
-      </p>
     </div>
   );
 }

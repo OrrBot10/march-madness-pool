@@ -39,7 +39,7 @@ async function AdminSeason({ params }: { params: Promise<{ year: string }> }) {
           <h2 className="font-semibold">ESPN results</h2>
           <p className="text-sm text-muted">
             Results update automatically: whenever anyone opens the site during the tournament and results are more
-            than two minutes old, it checks ESPN in the background. A round’s payouts post once every game in it is
+            than five minutes old, it checks ESPN in the background. A round’s payouts post once every game in it is
             final.
           </p>
           <dl className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-3">
